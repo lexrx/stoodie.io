@@ -12,7 +12,7 @@ function App() {
 
   //this function gets the notes from the backend
   const getNotes = () => {
-    axios.get("http://localhost:3000/notes")
+    axios.get("http://localhost:8000/notes")
     .then(res => {
       setNotes(res.data);
     });
@@ -24,7 +24,7 @@ function App() {
   }, []);
 
   const addNote = () => {
-    axios.post("http://localhost:3000/notes", {
+    axios.post("http://localhost:8000/notes", {
       title: title, content: content
     }).then(() => {
       getNotes();
@@ -37,20 +37,20 @@ function App() {
 
   return (
     <div className="Notes">
-      <header className="App-header">
-        <input> 
-          placeholder = "Title";
+      <header className="Notes-header">
+        <input
+          placeholder = "Title"
           value ={title}
           onChange={e => setTitle(e.target.value)}
-        </input>
+        />
 
         <br />
 
-        <textarea>
-          placeholder="Content"
+        <textarea
+          placeholder = "Content"
           value ={content}
           onChange={e => setContent(e.target.value)}
-        </textarea>
+        />
 
         <br />
 

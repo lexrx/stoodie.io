@@ -25,19 +25,28 @@ function App() {
 
   const addNote = () => {
     axios.post("http://localhost:8000/notes", {
-      title: title, content: content
+      title: title, 
+      content: content
     }).then(() => {
       getNotes();
-
       setTitle("");
       setContent("");
 
     });
   };
 
+  const deleteNote = () => {
+    axios.delete("http://localhost:8000/notes/${index}")
+    .then(() => {
+      getNotes();
+    });
+  }
+
   return (
     <div className="Notes">
-      <header className="Notes-header">
+      <div className="Notes-header">
+        <h1>Study Notes</h1>
+
         <input
           placeholder = "Title"
           value ={title}
@@ -56,15 +65,18 @@ function App() {
 
         <button onClick={addNote}> Add Note</button>
 
+        <h2>Notes</h2>
 
         {notes.map((notes, i) => (
-          <div key={i}>
+          <div key={i} className ="note">
             <h3>{notes.title}</h3>
             <p>{notes.content}</p>
+
+            <button onClick={()=> deleteNote(i)}>Delete</button>
           </div>
         ))}
 
-      </header>
+      </div>
     </div>
   );
 }

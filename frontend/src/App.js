@@ -35,8 +35,8 @@ function App() {
     });
   };
 
-  const deleteNote = () => {
-    axios.delete("http://localhost:8000/notes/${index}")
+  const deleteNote = (index) => {
+    axios.delete(`http://localhost:8000/notes/${index}`)
     .then(() => {
       getNotes();
     });

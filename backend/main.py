@@ -34,4 +34,13 @@ def add_notes(note: Notes):
     notes.append(note)
     return {"message": "Note has been added"} #added a message so it is easier to see when testing
 
+@app.delete("/notes/{index}")#function for deleting a note
+def delete_note(index: int):
+    if 0 <= index < len(notes):
+        notes.pop(index)
+        return {"message":"Note has been deleted"}
+    return {"error":"Invalid index"}
+
+
+
 

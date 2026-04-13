@@ -30,7 +30,7 @@ def get_notes(): #returning all notes
     return notes
 
 @app.post("/notes") #adds a note
-def add_notes(note: Note):
+def add_notes(note: Notes):
     notes.append(note)
     return {"message": "Note has been added"} #added a message so it is easier to see when testing
 

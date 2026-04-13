@@ -54,6 +54,9 @@ function App() {
 
         <br />
 
+        <button onClick={addNote}> Add Note</button>
+
+
         {notes.map((notes, i) => (
           <div key={i}>
             <h3>{notes.title}</h3>

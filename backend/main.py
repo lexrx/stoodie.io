@@ -51,7 +51,7 @@ def add_notes(note: NoteCreate, database: Session = Depends(get_database)):
     database.refresh(new_note)
     return new_note
 
-@app.delete("/notes/{index}")#function for deleting a note
+@app.delete("/notes/{note_id}")#function for deleting a note
 def delete_note(note_id: int, database: Session = Depends(get_database)):
     note = database.query(Note).filter(Note.id == note_id).first()
     if note:

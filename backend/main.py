@@ -1,9 +1,10 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, Depends
 from pydantic import BaseModel
 from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy.orm import Session
 from database import SessionLocal, engine, Base
 from fastapi.middleware.cors import CORSMiddleware
+from models import Note
 
 Base.metadata.create_all(bind=engine) #creating tables
 
@@ -23,13 +24,15 @@ def get_database(): #class to get database session
     try:
         yield database
     finally: 
-        database.close
+        database.close()
 #notes = [] #temp storage as a list
 
 #making sure there is a title and content
-class Notes(BaseModel):
+class NoteCreate(BaseModel):
     title: str 
     content: str 
+
+
 
 #Testing to see if backend is working
 @app.get("/")
@@ -37,20 +40,25 @@ def home():
     return {"message": "Backend works"}
 
 @app.get("/notes")
-def get_notes(): #returning all notes
-    return notes
+def get_notes(database: Session = Depends(get_database)): #now gets notes from database
+    return database.query(Note).all()
 
 @app.post("/notes") #adds a note
-def add_notes(note: Notes):
-    notes.append(note)
-    return {"message": "Note has been added"} #added a message so it is easier to see when testing
+def add_notes(note: NoteCreate, database: Session = Depends(get_database)):
+    new_note = Note(title=note.title, content=note.content)
+    database.add(new_note)
+    database.commit()
+    database.refresh(new_note)
+    return new_note
 
 @app.delete("/notes/{index}")#function for deleting a note
-def delete_note(index: int):
-    if 0 <= index < len(notes):
-        notes.pop(index)
-        return {"message":"Note has been deleted"}
-    return {"error":"Invalid index"}
+def delete_note(note_id: int, database: Session = Depends(get_database)):
+    note = database.query(Note).filter(Note.id == note_id).first()
+    if note:
+        database.delete(note)
+        database.commit()
+        return{"Note Deleted"}
+    return{"Error"}
 
 
 

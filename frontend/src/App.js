@@ -35,8 +35,8 @@ function App() {
     });
   };
 
-  const deleteNote = (index) => {
-    axios.delete(`http://localhost:8000/notes/${index}`)
+  const deleteNote = (id) => {
+    axios.delete(`http://localhost:8000/notes/${id}`)
     .then(() => {
       getNotes();
     });
@@ -67,12 +67,12 @@ function App() {
 
         <h2>Notes</h2>
 
-        {notes.map((notes, i) => (
-          <div key={i} className ="note">
+        {notes.map((notes) => (
+          <div key={notes.id} className ="note">
             <h3>{notes.title}</h3>
             <p>{notes.content}</p>
 
-            <button onClick={()=> deleteNote(i)}>Delete</button>
+            <button onClick={()=> deleteNote(notes.id)}>Delete</button>
           </div>
         ))}
 

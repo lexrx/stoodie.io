@@ -1,6 +1,11 @@
 from fastapi import FastAPI
 from pydantic import BaseModel
 from fastapi.middleware.cors import CORSMiddleware
+from sqlalchemy.orm import Session
+from database import SessionLocal, engine, Base
+from fastapi.middleware.cors import CORSMiddleware
+
+Base.metadata.create_all(bind=engine) #creating tables
 
 
 app = FastAPI()
@@ -13,7 +18,13 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-notes = [] #temp storage as a list
+def get_database(): #class to get database session
+    database = SessionLocal()
+    try:
+        yield database
+    finally: 
+        database.close
+#notes = [] #temp storage as a list
 
 #making sure there is a title and content
 class Notes(BaseModel):

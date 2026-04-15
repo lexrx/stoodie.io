@@ -23,10 +23,10 @@ function Register(){
     return (
         <div>
             <h2>Register</h2>
-            <input>
+            <input
                 placeholder = "Username"
                 onChange={e=>setUsername(e.target.value)}
-            </input>
+            />
             <br />
             <input
                 type="password"

@@ -24,6 +24,11 @@ function App() {
   }, []);
 
   const addNote = () => {
+    if (!title.trim() || !content.trim()){
+      alert("Please enter both title and content");
+      return;
+    }
+
     axios.post("http://localhost:8000/notes", {
       title: title, 
       content: content
@@ -31,7 +36,10 @@ function App() {
       getNotes();
       setTitle("");
       setContent("");
-
+    })
+    .catch(err => {
+      console.log(err.response.data);
+      alert("Invalid Input");
     });
   };
 

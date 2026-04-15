@@ -1,5 +1,5 @@
 from fastapi import FastAPI, Depends
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy.orm import Session
 from database import SessionLocal, engine, Base
@@ -29,8 +29,8 @@ def get_database(): #class to get database session
 
 #making sure there is a title and content
 class NoteCreate(BaseModel):
-    title: str 
-    content: str 
+    title: str = Field(min_length=1)
+    content: str = Field(min_length=1)
 
 
 

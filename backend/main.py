@@ -4,7 +4,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy.orm import Session
 from database import SessionLocal, engine, Base
 from fastapi.middleware.cors import CORSMiddleware
-from models import Note
+from models import Note, User
 
 Base.metadata.create_all(bind=engine) #creating tables
 
@@ -26,14 +26,29 @@ def get_database(): #class to get database session
     finally: 
         database.close()
 #notes = [] #temp storage as a list
+class UserCreate(BaseModel):
+    username: str
+    password: str
 
 #making sure there is a title and content
 class NoteCreate(BaseModel):
     title: str = Field(min_length=1)
     content: str = Field(min_length=1)
 
+@app.post("/register")
+def register(user: UserCreate, database: Session = Depends(get_database)):
+    new_user = User(username=user.username, password=user.password)
+    database.add(new_user)
+    database.commit()
+    return{"message":"User has been created"}
 
+@app.post("/login")
+def login(user: UserCreate, database: Session=Depends(get_database)):
+    existing_user = database.query(User).filter(User.username == user.username).first()
 
+    if existing_user and existing_user.password == user.password:
+        return{"success": True}
+    return{"success": False}
 #Testing to see if backend is working
 @app.get("/")
 def home():

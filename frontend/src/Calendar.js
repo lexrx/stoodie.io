@@ -90,7 +90,6 @@ function Calendar(){
                     <button onClick={addEvent}> Add Event </button>
                 )}
 
-                /*Display all events*/
                 <div className="events-list">
                     {events.map(event=>(
                         <div key={event.id} className="event"> 

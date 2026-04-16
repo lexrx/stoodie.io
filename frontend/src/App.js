@@ -7,13 +7,15 @@ import Calendar from "./Calendar";
 import Timer from "./Timer";
 import Flashcards from "./Flashcards";
 import './App.css';
+import Landing from "./Landing";
 
 function App(){
     return(
         <Router>
             <div className="App">
                 <Routes>
-                    <Route path="/" element={<Login />}/>
+                    <Route path="/" element={<Landing />}/>
+                    <Route path="/login" element={<Login />}/>
                     <Route path="/register" element={<Register />}/>
                     <Route path="/home" element={<Home />}/>
                     <Route path="/notes" element={<Notes />}/>

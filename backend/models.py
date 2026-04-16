@@ -14,3 +14,10 @@ class Note(Base):
     id = Column(Integer, primary_key=True, index=True)
     title = Column(String)
     content = Column(String)
+
+#Event table storing calendar data
+class Event(Base):
+    __tablename__ = "events" 
+    id = Column(Integer, primary_key=True, index=True)
+    title = Column(String)
+    date = Column(String)

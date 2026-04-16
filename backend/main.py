@@ -4,7 +4,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy.orm import Session
 from database import SessionLocal, engine, Base
 from fastapi.middleware.cors import CORSMiddleware
-from models import Note, User
+from models import Note, User, Event
 
 Base.metadata.create_all(bind=engine) #creating tables
 
@@ -25,6 +25,7 @@ def get_database(): #class to get database session
         yield database
     finally: 
         database.close()
+
 #notes = [] #temp storage as a list
 class UserCreate(BaseModel):
     username: str
@@ -34,6 +35,10 @@ class UserCreate(BaseModel):
 class NoteCreate(BaseModel):
     title: str = Field(min_length=1)
     content: str = Field(min_length=1)
+
+class EventCreate(BaseModel):
+    title: str
+    date: str
 
 @app.post("/register")
 def register(user: UserCreate, database: Session = Depends(get_database)):
@@ -74,6 +79,48 @@ def delete_note(note_id: int, database: Session = Depends(get_database)):
         database.commit()
         return{"Note Deleted"}
     return{"Error"}
+
+@app.get("/events")
+def get_events(database: Session = Depends(get_database)):
+    return database.query(Event).all()
+
+#adding an event to calendar
+@app.post("/events")
+def add_event(event: EventCreate, database: Session = Depends(get_database)):
+    new_event = Event(title=event.title, date=event.date) #creating new event object 
+    #adding to database
+    database.add(new_event)
+    database.commit()
+    database.refresh(new_event)
+
+    return new_event
+
+#deleting an event in calendar
+@app.delete("/events/{event_id}")
+def delete_event(event_id: int, database: Session = Depends(get_database)):
+    #finding event by id
+    event = database.query(Event).filter(Event.id == event_id).first()
+
+    if event:
+        database.delete()
+        database.commit()
+        return {"message" : "Event Deleted"}
+    return{"error": "Event not found"}
+
+@app.put("/events/{event_id}")
+def update_event(event_id: int, updated: EventCreate, database: Session = Depends(get_database)):
+    #finding event by id
+    event = database.query(Event).filter(Event.id == event_id).first()
+    if event:
+        event.title = updated.title
+        event.date = updated.date
+
+        database.commit()
+        return event
+    return{"error":"Event not found"}
+
+
+    
 
 
 

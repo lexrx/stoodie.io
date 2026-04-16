@@ -1,0 +1,101 @@
+body{
+    margin:0;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #4CAF50, #2e7d32)
+}
+
+.home-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: linear-gradient(135deg, #4CAF50, #2e7d32);
+    color: white;
+    text-align: center;
+}
+
+.home-card {
+    background:white;
+    color: black;
+    padding: 40px;
+    border-radius: 15px;
+    width:350px;
+    box-shadow:0px 8px 20px rgba(0,0,0,0.2);
+}
+
+.home-title{
+    font-size:28px;
+    margin-bottom: 20px;
+}
+
+.home-button{
+    width:100%;
+    padding:12px;
+    margin-top:15px;
+    border:none;
+    border-radius:8px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.login-btn{
+    background-color:#4CAF50;
+    color: white;
+}
+
+.login-btn:hover{
+    background-color: #45a049;
+}
+
+.register-btn{
+    background-color: #2196F3;
+    color:white;
+}
+
+.register-btn:hover{
+    background-color: #1976D2;
+}
+
+.notes-container {
+  display: flex;
+  justify-content: center;
+  padding: 40px;
+}
+
+.notes-card{
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  width: 400px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.notes-card input, .notes-card textarea{
+  width:100%;
+  margin-bottom:10px;
+  padding:8px;
+  border-radius:5px;
+  border:1px solid #ccc;
+}
+
+.notes-card button{
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  padding:8px;
+  border-radius:5px;
+  cursor:pointer;
+  width:100%;
+}
+
+.notes-card button:hover{
+  background-color:#45a049;
+}
+
+.note{
+  background: #fafafa;
+  margin-top: 10px;
+  padding:10px;
+  border-radius:5px;
+  border-left:4px solid #4CA450;
+}

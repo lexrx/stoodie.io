@@ -3,7 +3,47 @@ body{
     font-family: Arial, sans-serif;
     background: linear-gradient(135deg, #4CAF50, #2e7d32)
 }
+/*Dashboard*/
+.dashboard-container{
+    min-height:100vh;
+    background: linear-gradient(135deg, #4CAF50, #2e7d32);
+    padding: 40px;
+    color: white;
+    text-align: center;
+}
 
+.dashboard-title{
+    font-size: 36px;
+    margin-bottom: 40px;
+}
+
+.dashboard-grid{
+    display: grid;
+    grid-template-columns: repeat(2. 1fr);
+    gap: 20px;
+    max-width: 600px;
+    margin: auto;
+}
+
+/* Cards*/
+.card{
+    background: white;
+    color: black;
+    padding: 25px;
+    border-radius: 15px;
+    text-decoration: none;
+    box-shadow: 0px 6px 15px rgba(0,0,0,0.2);
+}
+
+.card:hover{
+    transform: scale(1.05);
+}
+
+.card h2{
+    margin-bottom: 10px;
+}
+
+/*Homepage*/
 .home-container{
     display: flex;
     justify-content: center;
@@ -38,6 +78,7 @@ body{
     cursor: pointer;
 }
 
+/*Login*/
 .login-btn{
     background-color:#4CAF50;
     color: white;
@@ -55,7 +96,8 @@ body{
 .register-btn:hover{
     background-color: #1976D2;
 }
-
+ 
+/*Notes*/
 .notes-container {
   display: flex;
   justify-content: center;

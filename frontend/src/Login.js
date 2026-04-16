@@ -1,6 +1,7 @@
 import axios from "axios";
 import {useState} from "react";
-import {useNavigate} from "react-router-dom";
+import {useNavigate, Link} from "react-router-dom";
+import "./App.css";
 
 function Login(){
     const [username,setUsername] = useState("");
@@ -15,7 +16,7 @@ function Login(){
         })
         .then(res=> {
             if(res.data.success){
-                navigate("/notes");
+                navigate("/home");
             } else{
                 alert("Invalid login");
             }
@@ -25,11 +26,15 @@ function Login(){
     return(
         <div>
             <h2>Login</h2>
-            <input onChange={e=> setUsername(e.target.value)}/>
+            <input placeholder="Username" onChange={e=> setUsername(e.target.value)}/>
 
             <input type="password" onChange={e=> setPassword(e.target.value)}/>
             
             <button onClick={login}>Login</button>
+
+            <p>
+                Don't have an account? <Link to="/register">Register</Link>
+            </p>
         </div>
     );
 }

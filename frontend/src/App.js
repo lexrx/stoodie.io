@@ -4,10 +4,10 @@ import Login from "./Login";
 import Register from "./Register";
 import Notes from "./Notes";
 import Calendar from "./Calendar";
-import Timer from "./Timer";
 import Flashcards from "./Flashcards";
-import './App.css';
 import Landing from "./Landing";
+import Timer from "./Timer";
+import './App.css';
 
 function App(){
     return(

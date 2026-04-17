@@ -21,3 +21,10 @@ class Event(Base):
     id = Column(Integer, primary_key=True, index=True)
     title = Column(String)
     date = Column(String)
+
+#table for storing songs in the queue
+class QueueSong():
+    __tablename__ = "queue_songs"
+    id=Column(Integer, primary_key=True, index=True)
+    title = Column(String)
+    url=Column(String)

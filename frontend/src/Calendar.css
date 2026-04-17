@@ -1,0 +1,212 @@
+.calendar-container {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 30px;
+    max-width: 600px;
+    margin: auto;
+    text-align: center;
+    padding: 20px;
+}
+
+.calendar-card {
+    background: white;
+    padding: 30px;
+    border-radius: 20px;
+    width: 100%;
+    max-width: 500px;
+    box-shadow: 0px 8px 20px rgba(0,0,0,0.1);
+    text-align: center;
+    flex: 2;
+}
+
+.calendar-card h2 {
+    margin-bottom: 20px;
+    color: #6d6875;
+    font-size: 26px;
+}
+
+.calendar-layout {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    align-items: flex-start;
+    flex-wrap: wrap;
+}
+
+.upcoming-card {
+    flex: 1;
+    max-width: 250px;
+    background: #ffffff;
+    padding: 20px;
+    border-radius: 15px;
+    width: 250px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+.upcoming-item {
+    background: #f9f9f9;
+    padding: 10px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+}
+
+.upcoming-item small {
+    color: #888;
+    font-size: 12px;
+}
+
+.upcoming-item strong {
+    color: #333;
+}
+
+/* React Calendar */
+.react-calendar {
+    border-radius: 15px;
+    border: none;
+    padding: 10px;
+    background: #fdfcff;
+    box-shadow: 0px 5px 15px rgba(0,0,0,0.1);
+}
+
+.react-calendar__navigation button {
+    color: #6d6875;
+    font-weight: bold;
+    background: none;
+    border-radius: 10px;
+}
+
+.react-calendar__navigation button:hover {
+    background: #f0eaff;
+}
+
+.react-calendar__month-view__weekdays {
+    text-transform: uppercase;
+    font-size: 12px;
+    color: #999;
+}
+
+.react-calendar__tile {
+    border-radius: 10px;
+    transition: 0.2s;
+    position: relative;
+}
+
+.react-calendar__tile:hover {
+    background: #e0c3fc;
+    color: white;
+}
+
+.react-calendar__tile--now {
+    background: #ffd6e0;
+    border-radius: 10px;
+}
+
+/* Input of calendar */
+.event-input {
+    margin-top: 20px;
+}
+
+.event-input input {
+    width: 65%;
+    padding: 10px;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    outline: none;
+    margin-right: 10px;
+}
+
+.event-input input:focus {
+    border-color: #cdb4db;
+}
+
+.event-input button {
+    padding: 10px 15px;
+    border-radius: 10px;
+    border: none;
+    background: #cdb4db;
+    color: white;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.event-input button:hover {
+    background: #b583d1;
+}
+
+.event-list {
+    margin-top: 25px;
+    text-align: left;
+}
+
+.event-list h3 {
+    background: #f8f7ff;
+    padding: 12px;
+    margin: 8px 0;
+    border-radius: 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: 0.3s;
+}
+
+.event:hover {
+    transform: scale(1.02);
+}
+
+.event button {
+    background: #ffafcc;
+    border: none;
+    border-radius: 8px;
+    padding: 5px 10px;
+    color: white;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.event button:hover {
+    background: #ff8fab;
+}
+
+.dot {
+    height: 6px;
+    width: 6px;
+    background-color: #ff7aa2;
+    border-radius: 50%;
+    margin: 2px auto 0;
+    position: absolute;
+    bottom: 5px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+body.dark .calendar-card {
+    background: #2a2a40;
+    color: white;
+}
+
+@media (max-width: 600px) {
+    .calendar-card {
+        padding: 20px;
+    }
+
+    .event-input input {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+    .event-input button {
+        width: 100%;
+    }
+}
+
+@media (max-width: 768px) {
+    .calendar-layout {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .upcoming-card {
+        width: 100%;
+    }
+}

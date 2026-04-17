@@ -1,0 +1,67 @@
+.timer-page{
+    min-height: 100vh;
+    padding:40px, 20px;
+    text-align: center;
+    background: linear-gradient(135deg, #ffd6e0, #cdb4db, #a2d2ff);
+}
+
+.timer-title{
+    color: #4b3f72;
+    margin-bottom:20px;
+}
+
+.timer-card,
+.queue-card{
+    background:rgba(255, 255, 255, 0.7);
+    width: 320px;
+    margin:20px auto;
+    padding: 20px;
+    border-radius: 20px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.timer-display{
+    font-size:2.5rem;
+    margin-bottom: 15px;
+    color:#5a4a6a;
+}
+
+.timer-buttons button,
+.queue-card button{
+    margin:5px;
+    padding: 10px 14px;
+    border:none;
+    border-radius:12px;
+    background-color:#ffafcc;
+    cursor: pointer;
+}
+
+.queue-card input{
+    display:block;
+    width: 90%;
+    margin:10px auto;
+    padding:10px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+}
+
+.queue-list{
+    list-style: none;
+    padding:0;
+    margin-top:15px;
+}
+
+.queue-item{
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.6);
+    border-radius: 12px;
+    padding:10px;
+    margin-bottom:10px;
+}
+
+.play-link{
+    margin-right: 10px;
+    text-decoration: none;
+}

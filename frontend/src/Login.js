@@ -1,7 +1,7 @@
 import axios from "axios";
 import {useState} from "react";
 import {useNavigate, Link} from "react-router-dom";
-import "./App.css";
+import "./Auth.css";
 
 function Login(){
     const [username,setUsername] = useState("");
@@ -28,7 +28,7 @@ function Login(){
             <h2>Login</h2>
             <input placeholder="Username" onChange={e=> setUsername(e.target.value)}/>
 
-            <input type="password" onChange={e=> setPassword(e.target.value)}/>
+            <input placeholder= "Password" type="password" onChange={e=> setPassword(e.target.value)}/>
             
             <button onClick={login}>Login</button>
 

@@ -30,9 +30,14 @@ function MyCalendar(){
     //safe date that handles edge cases, mkaes sure date is always a single date object
     const safeDate = Array.isArray(date) ? date[0] : date;
 
-    //formatted date for backend comparison
-    const formattedDate = safeDate.toISOString().split("T")[0];
+    const formatDate = (date) =>{
+        const d = new Date(date);
+        const year = d.getFullYear();
+        const month = String(d.getMonth() +1).padStart(2,"0");
+        const day = String(d.getDate()).padStart(2,"0");
 
+        return `${year}-${month}-${day}`;
+    };
 
 
     //adding an event
@@ -44,7 +49,7 @@ function MyCalendar(){
 
         axios.post("http://localhost:8000/events",{
             title: title,
-            date: formattedDate
+            date: formatDate(safeDate)
         }).then(()=>{
             getEvents();
             setTitle("");
@@ -55,8 +60,13 @@ function MyCalendar(){
     //deleting an event
     const deleteEvent = (id) =>{
         axios.delete(`http://localhost:8000/events/${id}`)
-            .then(() => getEvents())
-            .catch(()=>alert("Error deleting event"));
+            .then(() => {getEvents();
+
+            })
+            .catch(err=>{
+                console.log(err);
+                alert("Delete Failed")
+            });
     };
 
     //start editing event
@@ -69,7 +79,7 @@ function MyCalendar(){
     const updateEvent = () => {
         axios.put(`http://localhost:8000/events/${editingId}`,{
             title: title,
-            date: formattedDate
+            date: formatDate(safeDate)
         }).then(() => {
             setEditingId(null);
             setTitle("");
@@ -80,8 +90,10 @@ function MyCalendar(){
 
     //filtering events for a selected date
     const selectedEvents = events.filter(
-        event => event.date === formattedDate);
+        event => event.date === formatDate(safeDate));
 
+    
+    
     return(
         <div className="calendar-container">
             <div className="calendar-card">
@@ -93,7 +105,7 @@ function MyCalendar(){
                     value={date}
                     tileContent={({date,view}) =>{
                         if(view ==="month"){
-                            const formatted = date.toLocaleDateString("en-CA");
+                            const formatted = formatDate(date);
                             const hasEvent = events.some(
                                 event=>event.date === formatted
                             );

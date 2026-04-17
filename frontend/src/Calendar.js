@@ -47,10 +47,32 @@ function MyCalendar(){
     nextWeek.setDate(today.getDate()+7);
 
     //filter events within next 7 days
-    const upcomingEvents = events.filter(event =>{
-        const eventDate = new Date(event.date);
-        return eventDate >= today && eventDate <= nextWeek;
-    });
+    const upcomingEvents = events
+        .filter(event =>{
+            const eventDate = new Date(event.date);
+            eventDate.setHours(0,0,0,0);
+
+            return eventDate >= today && eventDate <= nextWeek;
+        })
+        .sort((a,b)=> new Date(a.date) - new Date(b.date));
+
+    const getDaysAway = (date) => {
+        const today = new Date();
+        const eventDate = new Date(date);
+
+        //removing time
+        today.setHours(0,0,0,0);
+        eventDate.setHours(0,0,0,0);
+
+        const diffTime = eventDate - today;
+        const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+
+        if(diffDays === 0) return "Today";
+        if(diffDays === 1) return "Tomorrow";
+        return `In ${diffDays} days`;
+    };
+        
+
     //adding an event
     const addEvent = () =>{
         if (!title.trim()){
@@ -103,7 +125,6 @@ function MyCalendar(){
     const selectedEvents = events.filter(
         event => event.date === formatDate(safeDate));
 
-    
     
     return(
         <div className="calendar-container">
@@ -166,7 +187,7 @@ function MyCalendar(){
                     upcomingEvents.map(event=>(
                         <div key={event.id} className="upcoming-item">
                             <p><strong>{event.title}</strong></p>
-                            <small>{event.date}</small>
+                            <small>{event.date}  • {getDaysAway(event.date)}</small>
                         </div>
                     ))
                 )}

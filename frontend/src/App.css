@@ -245,6 +245,27 @@ body{
     color: #6d6875;
     font-size: 26px;
 }
+.calendar-layout{
+    display:flex;
+    gap:20px;
+    justify-content: center;
+    align-items:flex-start;
+    flex-wrap:wrap;
+}
+.upcoming-card{
+    background:#fff;
+    padding:20px;
+    border-radius:15px;
+    width:250px;
+    box-shadow:0 4px 15px rgba(0,0,0,0.1);
+}
+
+.upcoming-item{
+    background: #f9f9f9;
+    padding: 10px;
+    border-radius:10px;
+    margin-bottom:10px;
+}
 /*React Calendar*/
 
 .react-calendar{
@@ -381,6 +402,17 @@ body{
     }
 
     .event-input button{
+        width:100%;
+    }
+}
+
+@media(max-width:768px){
+    .calendar-layout{
+        flex-direction:column;
+        align-items:center;
+    }
+
+    .upcoming-card{
         width:100%;
     }
 }

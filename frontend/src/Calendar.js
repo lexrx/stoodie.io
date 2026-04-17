@@ -39,7 +39,18 @@ function MyCalendar(){
         return `${year}-${month}-${day}`;
     };
 
+    //getting today's date
+    const today = new Date();
+    
+    //getting date 7 days from now
+    const nextWeek = new Date();
+    nextWeek.setDate(today.getDate()+7);
 
+    //filter events within next 7 days
+    const upcomingEvents = events.filter(event =>{
+        const eventDate = new Date(event.date);
+        return eventDate >= today && eventDate <= nextWeek;
+    });
     //adding an event
     const addEvent = () =>{
         if (!title.trim()){
@@ -146,6 +157,19 @@ function MyCalendar(){
                     )}
                 </div>
 
+            </div>
+            <div className ="upcoming-card">
+                <h3>📌 Upcoming Events </h3>  
+                {upcomingEvents.length === 0 ? (
+                    <p>No upcoming events</p>
+                ):(
+                    upcomingEvents.map(event=>(
+                        <div key={event.id} className="upcoming-item">
+                            <p><strong>{event.title}</strong></p>
+                            <small>{event.date}</small>
+                        </div>
+                    ))
+                )}
             </div>
         </div>
   );

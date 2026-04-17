@@ -91,6 +91,16 @@ function MyCalendar(){
                 <ReactCalendar
                     onChange={setDate}
                     value={date}
+                    tileContent={({date,view}) =>{
+                        if(view ==="month"){
+                            const formatted = date.toLocaleDateString("en-CA");
+                            const hasEvent = events.some(
+                                event=>event.date === formatted
+                            );
+
+                            return hasEvent ? <div className="dot"></div> : null;
+                        }
+                    }} 
                 />
 
                 <div className="event-input">

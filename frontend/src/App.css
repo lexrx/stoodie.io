@@ -276,6 +276,7 @@ body{
 .react-calendar__tile{
     border-radius:10px;
     transition:0.2s;
+    position:relative;
 }
 
 .react-calendar__tile:hover{
@@ -353,6 +354,20 @@ body{
 .event button:hover{
     background:#ff8fab;
 }
+
+.dot{
+    height:6px;
+    width: 6px;
+    background-color:#ff7aa2;
+    border-radius: 50%;
+    margin:2px auto 0;
+    position: absolute;
+    bottom: 5px;
+    left:50%;
+    transform: translateX(-50%);
+}
+
+
 
 /*for mobile*/
 @media(max-width:600px){

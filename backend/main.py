@@ -101,11 +101,12 @@ def delete_event(event_id: int, database: Session = Depends(get_database)):
     #finding event by id
     event = database.query(Event).filter(Event.id == event_id).first()
 
-    if event:
-        database.delete()
-        database.commit()
-        return {"message" : "Event Deleted"}
-    return{"error": "Event not found"}
+    if not event:
+        return{"error": "Event not found"}
+    database.delete(event);
+    database.commit()
+
+    return{"message":"Event deleted"}
 
 @app.put("/events/{event_id}")
 def update_event(event_id: int, updated: EventCreate, database: Session = Depends(get_database)):

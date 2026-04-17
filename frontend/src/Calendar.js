@@ -1,6 +1,8 @@
 import "./App.css"
 import axios from "axios";
 import {useState, useEffect} from "react";
+import Calendar from "react-calendar";
+import "react-calendar/dist/Calendar.css"
 
 function Calendar(){
     //storing all events from database
@@ -27,18 +29,17 @@ function Calendar(){
     //adding an event
     const addEvent = () =>{
         //basic validation
-        if (!title || !date){
-            alert("Please fill in all fields");
+        if (!title){
+            alert("Enter event title");
             return;
         }
 
         axios.post("http://localhost:8000/events",{
             title,
-            date
+            date: date.toISOString().split("T")[0]
         }).then(()=>{
             getEvents();
             setTitle("");
-            setDate("")
         });
     };
 
@@ -68,39 +69,41 @@ function Calendar(){
         });
     };
 
+    //filtering events for a selected date
+    const selectedEvents = events.filter(
+        event => event.date == date.toISOString().split("T")[0]
+    );
+
     return(
         <div className="calendar-container">
-            <div className="calendar-card">
-                <h2>📅 Calendar </h2>
+            <h2>📅 Calendar </h2>
+            <Calendar 
+                onChange={setDate}
+                value={date}
+            />
+            <div className="event-input"> 
                 <input 
                     type="text"
                     placeholder="Event Title"
                     value={title}
                     onChange={e=>setTitle(e.target.value)}
                 />
+                <button onClick={addEvent}> Add Event </button>
+            </div>
 
-                <input
-                    type="date"
-                    value={date}
-                    onChange={e=>setDate(e.target.value)}
-                />
-                {editingId ?(
-                    <button onClick={updateEvent}> Update Event </button>
-                ) : (
-                    <button onClick={addEvent}> Add Event </button>
-                )}
+            <div className = "event-list">
+                <h3>Events on {date.toDateString()}</h3>
 
-                <div className="events-list">
-                    {events.map(event=>(
-                        <div key={event.id} className="event"> 
-                            <h4>{event.title}</h4>
-                            <p>{event.date}</p>
-                            <button onClick={()=> startEdit(event)}> Edit </button>
-                            <button onClick={()=> deleteEvent(event.id)}> Delete </button>
+                {selectedEvents.length === 0 ?(
+                    <p>No events for this day</p>
+                ) :(
+                    selectedEvents.map(event => (
+                        <div key={event.id} className="event">
+                            <span>{event.title}</span>
+                            <button onClick={() => deleteEvent(event.id)}>Delete</button>
                         </div>
-
-                    ))}
-                </div>
+                    ))
+                )}
             </div>
         </div>
     );

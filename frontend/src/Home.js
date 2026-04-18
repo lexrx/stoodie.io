@@ -1,28 +1,32 @@
 import {Link} from "react-router-dom";
 import "./Home.css";
 
+const CARDS = [
+    { to: "/notes",      icon: "📝", label: "Notes",      desc: "Create and manage study notes" },
+    { to: "/calendar",   icon: "📅", label: "Calendar",   desc: "Plan your study schedule" },
+    { to: "/timer",      icon: "⏱",  label: "Timer",      desc: "Focus with Pomodoro sessions" },
+    { to: "/flashcards", icon: "🧠", label: "Flashcards", desc: "Revise with flashcards" },
+];
+
 function Home(){
+    const username=localStorage.getItem("username") || "there";
     return (
-        <div className="dashboard-container">
-            <h1 className="dashboard-title">Stoodie.io</h1>
-            <div className="dashboard-grid">
-                <Link to="/notes" className="card">
-                    <h2>📝 Notes </h2>
-                    <p>Create and manage study notes</p>
-                </Link>
-                <Link to="/calendar" className="card">
-                    <h2>📅 Calendar </h2>
-                    <p>Plan your study schedule</p>
-                </Link>
-                <Link to="/timer" className="card">
-                    <h2>⏱ Timer </h2>
-                    <p> Focus with study sessions </p>
-                </Link>
-                <Link to="/flashcards" className="card">
-                    <h2>🧠 Flashcards </h2>
-                    <p> Revise with flashcards </p>
-                </Link>
-            </div>   
+        <div className="home-page">
+            <div className="home-header">
+                <p className="home-eyebrow">stoodie.io</p>
+                <h1 className="home-title">Hey, {username} 👋</h1>
+                <p className="home-subtitle">Where would you like to start today?</p>
+            </div>
+ 
+            <div className="home-grid">
+                {CARDS.map(card => (
+                    <Link key={card.to} to={card.to} className="home-card">
+                        <span className="home-card-icon">{card.icon}</span>
+                        <h2 className="home-card-label">{card.label}</h2>
+                        <p className="home-card-desc">{card.desc}</p>
+                    </Link>
+                ))}
+            </div>
         </div>
     );
 }

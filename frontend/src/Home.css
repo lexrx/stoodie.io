@@ -1,49 +1,90 @@
-.dashboard-container {
-    min-height: 100vh;
-    padding: 40px;
+.home-page {
+    min-height: calc(100vh - 58px);
+    padding: 48px 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.home-header {
     text-align: center;
+    margin-bottom: 40px;
+    animation: slideUp 0.4s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-.dashboard-title {
-    color: #6d6875;
-    margin-bottom: 30px;
+.home-eyebrow {
+    font-family: 'DM Serif Display', serif;
+    font-size: 13px;
+    letter-spacing: 0.12em;
+    color: #b8a0cc;
+    margin: 0 0 10px;
 }
 
-.dashboard-grid {
+.home-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 36px;
+    font-weight: 400;
+    color: #5a4a6a;
+    margin: 0 0 10px;
+}
+
+.home-subtitle {
+    font-size: 15px;
+    color: #9a8aaa;
+    font-weight: 300;
+    margin: 0;
+}
+
+.home-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 20px;
-    max-width: 600px;
-    margin: auto;
+    gap: 16px;
+    max-width: 560px;
+    width: 100%;
+    animation: slideUp 0.5s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-/* Cards */
-.card {
-    background: white;
-    color: #333;
-    padding: 25px;
-    border-radius: 15px;
+.home-card {
+    background: rgba(255, 255, 255, 0.78);
+    backdrop-filter: blur(14px);
+    border-radius: 24px;
+    padding: 28px 24px;
     text-decoration: none;
-    box-shadow: 0px 6px 15px rgba(0,0,0,0.1);
-    transition: 0.3s;
-    animation: fadeIn 0.6s ease-in-out;
+    border: 1px solid rgba(255, 255, 255, 0.75);
+    box-shadow: 0 2px 16px rgba(180, 160, 220, 0.1);
+    transition: transform 0.2s, box-shadow 0.2s;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
 }
 
-.card:hover {
-    transform: scale(1.05);
+.home-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 32px rgba(180, 160, 220, 0.2);
 }
 
-.card h2 {
-    margin-bottom: 10px;
-    color: #6d6875;
+.home-card-icon {
+    font-size: 28px;
 }
 
-.card p {
-    font-size: 14px;
-    color: #555;
+.home-card-label {
+    font-family: 'DM Serif Display', serif;
+    font-size: 20px;
+    font-weight: 400;
+    color: #5a4a6a;
+    margin: 0;
 }
 
-body.dark .card {
-    background: #2a2a40;
-    color: white;
+.home-card-desc {
+    font-size: 13px;
+    color: #9a8aaa;
+    font-weight: 300;
+    margin: 0;
+    line-height: 1.5;
+}
+
+@media (max-width: 480px) {
+    .home-grid {
+        grid-template-columns: 1fr;
+    }
 }

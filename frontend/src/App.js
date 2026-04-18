@@ -7,24 +7,34 @@ import Calendar from "./Calendar";
 import Flashcards from "./Flashcards";
 import Landing from "./Landing";
 import Timer from "./Timer";
+import Profile from "./Profile";
+import Navbar from "./Navbar";
 import './App.css';
+
+function Layout({children}){
+    return(
+        <>
+            <Navbar />
+            {children}
+        </>
+    );
+}
 
 function App(){
     return(
         <Router>
-            <div className="App">
-                <Routes>
-                    <Route path="/" element={<Landing />}/>
-                    <Route path="/login" element={<Login />}/>
-                    <Route path="/register" element={<Register />}/>
-                    <Route path="/home" element={<Home />}/>
-                    <Route path="/notes" element={<Notes />}/>
-                    <Route path="/calendar" element={<Calendar />}/>
-                    <Route path="/timer" element={<Timer />}/>
-                    <Route path="/flashcards" element={<Flashcards />}/>
+            <Routes>
+                <Route path="/" element={<Landing />}/>
+                <Route path="/login" element={<Login />}/>
+                <Route path="/register" element={<Register />}/>
+                <Route path="/home" element={<Home />}/>
+                <Route path="/notes" element={<Notes />}/>
+                <Route path="/calendar" element={<Calendar />}/>
+                <Route path="/timer" element={<Timer />}/>
+                <Route path="/flashcards" element={<Flashcards />}/>
+                <Route path="/profile" element={<Profile />}/>
+                <Route path="*" element={<Navigate to="/" />} />
             </Routes>
-            </div>
-            
         </Router>
     );
 }

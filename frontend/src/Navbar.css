@@ -1,27 +1,78 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap');
+
 .navbar {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background: #b8c0ff;
-    padding: 15px 30px;
-    color: white;
+    background: rgba(255, 255, 255, 0.72);
+    backdrop-filter: blur(14px);
+    border-bottom: 1px solid rgba(200, 180, 240, 0.25);
+    padding: 0 32px;
+    height: 58px;
+    font-family: 'DM Sans', sans-serif;
+    position: sticky;
+    top: 0;
+    z-index: 100;
 }
 
 .logo {
+    font-family: 'DM Serif Display', serif;
+    font-size: 18px;
+    font-weight: 400;
+    color: #7a5a9a;
     margin: 0;
+    letter-spacing: 0.02em;
+}
+
+.nav-links{
+    display:flex;
+    align-items: center;
+    gap: 4px;
 }
 
 .nav-links a {
+    padding: 6px 14px;
+    border-radius: 20px;
+    text-decoration: none;
     margin: 0 10px;
     text-decoration: none;
-    color: white;
+    color: #7a6a8a;
+    font-size: 14px;
+    font-weight: 400;
+    transition: background 0.18s, color 0.18s;
 }
 
-.nav-links button {
-    margin-left: 10px;
-    padding: 6px 10px;
-    border: none;
-    border-radius: 6px;
-    background: #ffd6e0;
+.nav-links a:hover {
+    background: rgba(184, 192, 255, 0.18);
+    color: #5a4a7a;
+}
+ 
+.nav-right {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+ 
+.nav-username {
+    font-size: 13px;
+    color: #9a8aaa;
+    font-weight: 300;
+}
+ 
+.logout-btn {
+    padding: 6px 16px;
+    border: 1.5px solid #e0c8f0;
+    border-radius: 20px;
+    background: transparent;
+    color: #9a7aba;
+    font-size: 13px;
+    font-family: 'DM Sans', sans-serif;
     cursor: pointer;
+    transition: background 0.18s, color 0.18s;
+}
+ 
+.logout-btn:hover {
+    background: #fde8f8;
+    color: #7a4a9a;
+    border-color: #c8a0e0;
 }

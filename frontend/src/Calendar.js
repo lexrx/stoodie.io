@@ -20,6 +20,9 @@ function MyCalendar(){
     //storing id of event being edited
     const[editingId, setEditingId] = useState(null);
 
+    const [error, setError] = useState("");
+
+    
     //getting events from backend
     const getEvents = () => {
         axios.get("http://localhost:8000/events", { headers: authHeader() })

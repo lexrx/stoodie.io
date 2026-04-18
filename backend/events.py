@@ -1,8 +1,8 @@
+from deps import get_database, get_current_user
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 from models import Event
 from schemas import EventCreate, EventOut
-from deps import get_database, get_current_user
 from typing import List
 
 router = APIRouter()

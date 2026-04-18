@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import MusicQueue from "./MusicQueue";
+import WhiteNoisePlayer from "./Whitenoiseplayer"
 import "./Timer.css";
 
 const MODES = [

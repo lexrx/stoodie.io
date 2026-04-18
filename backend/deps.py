@@ -1,15 +1,14 @@
 from database import SessionLocal
 from fastapi import Depends, HTTPException
 from fastapi.security import OAuth2PasswordBearer
-from passlib.context import CryptContext
 from jose import JWTError, jwt
 from datetime import datetime, timedelta, timezone
+import bcrypt
 
 SECRET_KEY = "change-this-to-a-long-random-secret-in-production"
 ALGORITHM = "HS256"
 TOKEN_EXPIRE_MINUTES = 60 * 24  # 24 hours
 
-pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/login")
 
 def get_database():
@@ -20,10 +19,10 @@ def get_database():
         database.close()
 
 def hash_password(password: str) -> str:
-    return pwd_context.hash(password)
+    return bcrypt.hashpw(password.encode("utf-8"), bcrypt.gensalt()).decode("utf-8")
 
 def verify_password(plain: str, hashed: str) -> bool:
-    return pwd_context.verify(plain, hashed)
+    return bcrypt.checkpw(plain.encode("utf-8"), hashed.encode("utf-8"))
 
 def create_token(data: dict) -> str:
     payload = data.copy()

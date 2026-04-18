@@ -3,7 +3,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from database import engine, Base
 import auth
 import notes
-import calendar
+import events
 import pomodoro
 import profile
 
@@ -27,7 +27,7 @@ def home():
 
 app.include_router(auth.router)
 app.include_router(notes.router)
-app.include_router(calendar.router)
+app.include_router(events.router)
 app.include_router(pomodoro.router)
 app.include_router(profile.router)
 

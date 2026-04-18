@@ -1,93 +1,158 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
+import MusicPlayer from "./MusicPlayer";
 
-function MusicQueue(){
-    //stores all songs from backend
-    const[queue, setQueue] = useState([]);
-    //input for song title
-    const[title,setTitle] = useState("");
-    //input for song url
-    const[url,setUrl] = useState("");
+function MusicQueue() {
+    const [queue, setQueue] = useState([]);
+    const [title, setTitle] = useState("");
+    const [url, setUrl] = useState("");
+    const [currentIndex, setCurrentIndex] = useState(0);
 
-    //get all songs from backend
     async function fetchQueue() {
-        try{
+        try {
             const response = await axios.get("http://localhost:8000/queue");
+            console.log("QUEUE DATA:", response.data);
             setQueue(response.data);
-        } catch (error){
+        } catch (error) {
             console.error("Error fetching queue:", error);
         }
-        
     }
 
-    //load queue when page opens
-    useEffect(() =>{
+    useEffect(() => {
         fetchQueue();
     }, []);
 
-    //add a song to the backend
-    async function addSong(){
-        if(!title || !url) return;
-        try{
-            await axios("http://localhost:8000/queue", {
-                title:title,
-                url:url
+    async function addSong() {
+        if (!title || !url) {
+            alert("Please enter both title and URL");
+            return;
+        }
+
+        try {
+            const response = await axios.post("http://localhost:8000/queue", {
+                title,
+                url
             });
+
+            console.log("Added song:", response.data);
 
             setTitle("");
             setUrl("");
             fetchQueue();
-        } catch (error){
+        } catch (error) {
             console.error("Error adding song:", error);
+
+            if(error.response){
+                console.error("Backend response:", error.response.data);
+                alert("Add failed: "+JSON.stringify(error.response.data));
+            }else{
+                alert("Add failed. Check backend is running");
+            }
         }
     }
 
-    //delete song from backend
-    async function deleteSong(songId){
-        try{
+    async function deleteSong(songId, indexToDelete) {
+        try {
             await axios.delete(`http://localhost:8000/queue/${songId}`);
-            fetchQueue();
-        } catch(error){
+
+            const updatedQueue = queue.filter((song) => song.id !== songId);
+            setQueue(updatedQueue);
+
+            if (updatedQueue.length === 0) {
+                setCurrentIndex(0);
+            } else if (indexToDelete < currentIndex) {
+                setCurrentIndex((prev) => prev - 1);
+            } else if (indexToDelete === currentIndex) {
+                setCurrentIndex(0);
+            }
+        } catch (error) {
             console.error("Error deleting song:", error);
         }
     }
 
-    return(
-        <div className="queue-card">
-            <h2> 🎵 Music Queue </h2>
-            <input 
-                type="text"
-                placeholder="Song Title"
-                value={title}
-                onChange={(e) => setTitle(e.target.value)}
-            />
+    function nextSong() {
+        if (queue.length === 0) return;
+        setCurrentIndex((prev) => (prev + 1) % queue.length);
+    }
 
-            <input
-                type="text"
-                placeholder="Song URL"
-                value={url}
-                onChange={(e) => setUrl(e.target.value)}
-            />
+    function previousSong() {
+        if (queue.length === 0) return;
+        setCurrentIndex((prev) => (prev - 1 + queue.length) % queue.length);
+    }
 
-            <button onClick={addSong}>Add Song</button>
-            <ul className="queue-list">
-                {queue.map((song) => (
-                    <li key={song.id} className="queue-time">
-                        <span>{song.title}</span>
-                        <div>
-                            <a
-                                href={song.url}
-                                target="_blank"
-                                rel="noreferrer"
-                                className="play-link"
+    function selectSong(index) {
+        setCurrentIndex(index);
+    }
+
+    const currentSong = queue.length > 0 ? queue[currentIndex] : null;
+
+    return (
+        <div className="music-layout">
+            <div className="queue-card">
+                <h2>🎵 Music Player</h2>
+
+                <MusicPlayer currentSong={currentSong} onNext={nextSong} />
+
+                <div className="player-controls">
+                    <button onClick={previousSong} disabled={queue.length === 0}>
+                        ⏮ Previous
+                    </button>
+                    <button onClick={nextSong} disabled={queue.length === 0}>
+                        Next ⏭
+                    </button>
+                </div>
+
+                <div className="add-song-form">
+                    <input
+                        type="text"
+                        placeholder="Song title"
+                        value={title}
+                        onChange={(e) => setTitle(e.target.value)}
+                    />
+
+                    <input
+                        type="text"
+                        placeholder="Paste YouTube or Spotify link"
+                        value={url}
+                        onChange={(e) => setUrl(e.target.value)}
+                    />
+
+                    <button onClick={addSong}>Add to Queue</button>
+                </div>
+            </div>
+
+            <div className="queue-sidebar">
+                <h2>Queue</h2>
+
+                {queue.length === 0 ? (
+                    <p className="empty-queue">Your queue is empty.</p>
+                ) : (
+                    <ul className="queue-list">
+                        {queue.map((song, index) => (
+                            <li
+                                key={song.id}
+                                className={`queue-item ${index === currentIndex ? "active-song" : ""}`}
                             >
-                                ▶
-                            </a>
-                            <button onClick={() => deleteSong(song.id)}>❌</button>
-                        </div>
-                    </li>
-                ))}
-            </ul>
+                                <div className="queue-song-info">
+                                    <strong>{song.title}</strong>
+                                    <p className="song-platform">
+                                        {song.platform || "unknown"}
+                                    </p>
+                                </div>
+
+                                <div className="queue-song-actions">
+                                    <button onClick={() => selectSong(index)}>
+                                        Play
+                                    </button>
+                                    <button onClick={() => deleteSong(song.id, index)}>
+                                        Remove
+                                    </button>
+                                </div>
+                            </li>
+                        ))}
+                    </ul>
+                )}
+            </div>
         </div>
     );
 }

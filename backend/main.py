@@ -4,6 +4,8 @@ from database import engine, Base
 import auth
 import notes
 import calendar
+import pomodoro
+import profile
 
 Base.metadata.create_all(bind=engine) #creating tables
 
@@ -26,7 +28,8 @@ def home():
 app.include_router(auth.router)
 app.include_router(notes.router)
 app.include_router(calendar.router)
-
+app.include_router(pomodoro.router)
+app.include_router(profile.router)
 
 
 

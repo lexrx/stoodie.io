@@ -13,3 +13,14 @@ class NoteCreate(BaseModel):
 class EventCreate(BaseModel):
     title: str
     date: str
+
+class SongCreate(BaseModel):
+    title: str
+    url: str
+
+class ProfileCreate(BaseModel):
+    full_name:str
+    email:str
+    bio:str
+    savings_goal:str
+    savings_amount:str

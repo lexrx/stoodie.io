@@ -1,0 +1,27 @@
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #b8c0ff;
+    padding: 15px 30px;
+    color: white;
+}
+
+.logo {
+    margin: 0;
+}
+
+.nav-links a {
+    margin: 0 10px;
+    text-decoration: none;
+    color: white;
+}
+
+.nav-links button {
+    margin-left: 10px;
+    padding: 6px 10px;
+    border: none;
+    border-radius: 6px;
+    background: #ffd6e0;
+    cursor: pointer;
+}

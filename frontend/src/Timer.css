@@ -10,8 +10,7 @@
     margin-bottom:20px;
 }
 
-.timer-card,
-.queue-card{
+.timer-card{
     background:rgba(255, 255, 255, 0.7);
     width: 320px;
     margin:20px auto;
@@ -26,8 +25,7 @@
     color:#5a4a6a;
 }
 
-.timer-buttons button,
-.queue-card button{
+.timer-buttons button{
     margin:5px;
     padding: 10px 14px;
     border:none;
@@ -36,32 +34,113 @@
     cursor: pointer;
 }
 
-.queue-card input{
-    display:block;
-    width: 90%;
-    margin:10px auto;
-    padding:10px;
+.music-layout{
+    display: flex;
+    gap:20px;
+    justify-content: center;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    margin-top: 30px;
+}
+
+.queue-card,
+.queue-sidebar {
+    background: rgba(255, 255, 255, 0.75);
+    border-radius: 20px;
+    padding: 20px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.queue-card {
+    width: 350px;
+}
+
+.queue-sidebar {
+    width: 320px;
+    text-align: left;
+}
+
+.now-playing {
+    color: #5a4a6a;
+    margin-bottom: 15px;
+}
+
+.player-controls {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin: 15px 0;
+}
+
+.player-controls button,
+.queue-song-actions button,
+.add-song-form button {
+    padding: 10px 14px;
+    border: none;
+    border-radius: 12px;
+    background-color: #ffafcc;
+    cursor: pointer;
+}
+
+.volume-control {
+    margin: 15px 0;
+    text-align: left;
+}
+
+.volume-control label {
+    display: block;
+    margin-bottom: 8px;
+    color: #5a4a6a;
+}
+
+.volume-control input {
+    width: 100%;
+}
+
+.add-song-form {
+    margin-top: 20px;
+}
+
+.add-song-form input {
+    display: block;
+    width: 100%;
+    margin: 10px 0;
+    padding: 10px;
     border: 1px solid #ddd;
     border-radius: 10px;
+    box-sizing: border-box;
 }
 
-.queue-list{
+.queue-list {
     list-style: none;
-    padding:0;
-    margin-top:15px;
+    padding: 0;
+    margin: 0;
 }
 
-.queue-item{
-    display:flex;
+.queue-item {
+    display: flex;
     justify-content: space-between;
     align-items: center;
-    background: rgba(255, 255, 255, 0.6);
+    background: rgba(255, 255, 255, 0.7);
     border-radius: 12px;
-    padding:10px;
-    margin-bottom:10px;
+    padding: 12px;
+    margin-bottom: 10px;
+    gap: 10px;
 }
 
-.play-link{
-    margin-right: 10px;
-    text-decoration: none;
+.queue-song-info {
+    flex: 1;
+}
+
+.queue-song-actions {
+    display: flex;
+    gap: 8px;
+}
+
+.active-song {
+    border: 2px solid #cdb4db;
+}
+
+.empty-queue {
+    color: #666;
 }

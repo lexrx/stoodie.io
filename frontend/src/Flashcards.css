@@ -1,33 +1,88 @@
-.flashcards-page {
+.flashcard-page {
     min-height: calc(100vh - 58px);
     display: flex;
     align-items: center;
     justify-content: center;
+    padding: 24px 24px 100px;
     font-family: 'DM Sans', sans-serif;
 }
- 
-.flashcards-coming-soon {
+
+.flashcard-card {
+    width: 100%;
+    max-width: 420px;
+    background: rgba(255, 255, 255, 0.82);
+    backdrop-filter: blur(16px);
+    border-radius: 28px;
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    box-shadow: 0 8px 40px rgba(180, 160, 220, 0.14);
+    padding: 48px 36px;
     text-align: center;
-    animation: slideUp 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+    animation: slideUp 0.45s cubic-bezier(0.22, 1, 0.36, 1);
 }
- 
-.flashcards-icon {
+
+.flashcard-icon {
     font-size: 52px;
     display: block;
     margin-bottom: 20px;
+    animation: float 3s ease-in-out infinite;
 }
- 
-.flashcards-coming-soon h1 {
+
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50%       { transform: translateY(-8px); }
+}
+
+.flashcard-title {
     font-family: 'DM Serif Display', serif;
-    font-size: 32px;
+    font-size: 30px;
     font-weight: 400;
     color: #5a4a6a;
-    margin: 0 0 12px;
+    margin: 0 0 8px;
 }
- 
-.flashcards-coming-soon p {
-    font-size: 15px;
+
+.flashcard-sub {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: white;
+    background: linear-gradient(135deg, #c8b0e8, #b8c0ff);
+    padding: 4px 14px;
+    border-radius: 20px;
+    margin: 0 0 20px;
+}
+
+.flashcard-desc {
+    font-size: 14px;
     color: #9a8aaa;
     font-weight: 300;
-    margin: 0;
+    line-height: 1.65;
+    margin: 0 0 28px;
+}
+
+.flashcard-features {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    text-align: left;
+}
+
+.flashcard-feature {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 11px 16px;
+    background: rgba(248, 244, 255, 0.7);
+    border-radius: 14px;
+    border: 1px solid rgba(200, 180, 240, 0.2);
+    font-size: 13.5px;
+    color: #6a5a7a;
+    font-weight: 400;
+}
+
+.flashcard-feature span {
+    color: #b8a0d8;
+    font-size: 12px;
+    flex-shrink: 0;
 }

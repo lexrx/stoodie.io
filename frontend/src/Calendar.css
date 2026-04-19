@@ -1,212 +1,416 @@
-.calendar-container {
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    gap: 30px;
-    max-width: 600px;
-    margin: auto;
-    text-align: center;
-    padding: 20px;
+.cal-page {
+    min-height: calc(100vh - 58px);
+    padding: 32px 24px 100px;
+    font-family: 'DM Sans', sans-serif;
 }
 
-.calendar-card {
-    background: white;
-    padding: 30px;
-    border-radius: 20px;
-    width: 100%;
-    max-width: 500px;
-    box-shadow: 0px 8px 20px rgba(0,0,0,0.1);
-    text-align: center;
-    flex: 2;
-}
-
-.calendar-card h2 {
-    margin-bottom: 20px;
-    color: #6d6875;
-    font-size: 26px;
-}
-
-.calendar-layout {
+.cal-layout {
     display: flex;
     gap: 20px;
-    justify-content: center;
+    max-width: 900px;
+    margin: 0 auto;
     align-items: flex-start;
-    flex-wrap: wrap;
 }
 
-.upcoming-card {
+.cal-left {
     flex: 1;
-    max-width: 250px;
-    background: #ffffff;
-    padding: 20px;
-    border-radius: 15px;
-    width: 250px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
 }
 
-.upcoming-item {
-    background: #f9f9f9;
-    padding: 10px;
-    border-radius: 10px;
-    margin-bottom: 10px;
+.cal-header {
+    display: flex;
+    align-items: baseline;
+    gap: 14px;
 }
 
-.upcoming-item small {
-    color: #888;
-    font-size: 12px;
+.cal-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 30px;
+    font-weight: 400;
+    color: #5a4a6a;
+    margin: 0;
 }
 
-.upcoming-item strong {
-    color: #333;
+/* Calendar widget */
+.cal-widget-wrap {
+    background: rgba(255,255,255,0.85);
+    backdrop-filter: blur(14px);
+    border-radius: 24px;
+    border: 1px solid rgba(255,255,255,0.8);
+    box-shadow: 0 4px 28px rgba(180,160,220,0.13);
+    padding: 18px;
+    overflow: hidden;
 }
 
-/* React Calendar */
-.react-calendar {
-    border-radius: 15px;
+.cal-widget-wrap .react-calendar {
+    width: 100%;
     border: none;
-    padding: 10px;
-    background: #fdfcff;
-    box-shadow: 0px 5px 15px rgba(0,0,0,0.1);
+    background: transparent;
+    font-family: 'DM Sans', sans-serif;
 }
 
-.react-calendar__navigation button {
-    color: #6d6875;
-    font-weight: bold;
+.cal-widget-wrap .react-calendar__navigation {
+    margin-bottom: 12px;
+}
+
+.cal-widget-wrap .react-calendar__navigation button {
+    color: #7a5a9a;
+    font-weight: 500;
     background: none;
     border-radius: 10px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    min-width: 36px;
+    padding: 6px;
+    transition: background 0.15s;
 }
 
-.react-calendar__navigation button:hover {
-    background: #f0eaff;
+.cal-widget-wrap .react-calendar__navigation button:hover {
+    background: rgba(200,176,232,0.18);
 }
 
-.react-calendar__month-view__weekdays {
+.cal-widget-wrap .react-calendar__navigation__label {
+    font-family: 'DM Serif Display', serif;
+    font-size: 16px;
+    color: #5a4a6a;
+}
+
+.cal-widget-wrap .react-calendar__month-view__weekdays {
     text-transform: uppercase;
-    font-size: 12px;
-    color: #999;
+    font-size: 10px;
+    letter-spacing: 0.07em;
+    color: #c0a8d8;
+    font-weight: 500;
+    margin-bottom: 4px;
 }
 
-.react-calendar__tile {
-    border-radius: 10px;
-    transition: 0.2s;
-    position: relative;
+.cal-widget-wrap .react-calendar__month-view__weekdays abbr {
+    text-decoration: none;
 }
 
-.react-calendar__tile:hover {
-    background: #e0c3fc;
-    color: white;
-}
-
-.react-calendar__tile--now {
-    background: #ffd6e0;
-    border-radius: 10px;
-}
-
-/* Input of calendar */
-.event-input {
-    margin-top: 20px;
-}
-
-.event-input input {
-    width: 65%;
-    padding: 10px;
-    border-radius: 10px;
-    border: 1px solid #ccc;
-    outline: none;
-    margin-right: 10px;
-}
-
-.event-input input:focus {
-    border-color: #cdb4db;
-}
-
-.event-input button {
-    padding: 10px 15px;
-    border-radius: 10px;
-    border: none;
-    background: #cdb4db;
-    color: white;
-    cursor: pointer;
-    transition: 0.3s;
-}
-
-.event-input button:hover {
-    background: #b583d1;
-}
-
-.event-list {
-    margin-top: 25px;
-    text-align: left;
-}
-
-.event-list h3 {
-    background: #f8f7ff;
-    padding: 12px;
-    margin: 8px 0;
+.cal-widget-wrap .react-calendar__tile {
     border-radius: 12px;
+    font-size: 13px;
+    color: #5a4a6a;
+    font-family: 'DM Sans', sans-serif;
+    padding: 10px 4px;
+    position: relative;
+    transition: background 0.15s;
+    aspect-ratio: 1;
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
     align-items: center;
-    transition: 0.3s;
+    justify-content: center;
 }
 
-.event:hover {
-    transform: scale(1.02);
+.cal-widget-wrap .react-calendar__tile:hover {
+    background: rgba(200,176,232,0.22);
 }
 
-.event button {
-    background: #ffafcc;
-    border: none;
-    border-radius: 8px;
-    padding: 5px 10px;
-    color: white;
-    cursor: pointer;
-    transition: 0.3s;
+.cal-widget-wrap .react-calendar__tile--now {
+    background: rgba(255,182,193,0.22);
+    font-weight: 500;
 }
 
-.event button:hover {
-    background: #ff8fab;
+.cal-widget-wrap .react-calendar__tile--active,
+.cal-widget-wrap .react-calendar__tile--active:hover {
+    background: linear-gradient(135deg, #c8b0e8, #b8c0ff) !important;
+    color: white !important;
+    font-weight: 500;
 }
 
-.dot {
-    height: 6px;
-    width: 6px;
-    background-color: #ff7aa2;
+.cal-widget-wrap .react-calendar__month-view__days__day--neighboringMonth {
+    color: #d0c0e0;
+}
+
+.cal-dot-row {
+    display: flex;
+    gap: 2px;
+    justify-content: center;
+    margin-top: 3px;
+}
+
+.cal-dot {
+    width: 4px;
+    height: 4px;
     border-radius: 50%;
-    margin: 2px auto 0;
-    position: absolute;
-    bottom: 5px;
-    left: 50%;
-    transform: translateX(-50%);
+    background: #c090d8;
+    display: block;
 }
 
-body.dark .calendar-card {
-    background: #2a2a40;
+.cal-widget-wrap .react-calendar__tile--active .cal-dot {
+    background: rgba(255,255,255,0.7);
+}
+
+/* Form */
+.cal-form {
+    background: rgba(255,255,255,0.82);
+    backdrop-filter: blur(14px);
+    border-radius: 20px;
+    border: 1px solid rgba(255,255,255,0.8);
+    box-shadow: 0 4px 20px rgba(180,160,220,0.1);
+    padding: 18px 20px;
+}
+
+.cal-selected-label {
+    font-size: 13px;
+    color: #9a8aaa;
+    margin: 0 0 10px;
+    font-weight: 300;
+}
+
+.cal-selected-label strong {
+    color: #6a4a7a;
+    font-weight: 500;
+}
+
+.cal-input-row {
+    display: flex;
+    gap: 8px;
+}
+
+.cal-input {
+    flex: 1;
+    padding: 10px 14px;
+    border: 1.5px solid #ece4f4;
+    border-radius: 14px;
+    font-size: 14px;
+    font-family: 'DM Sans', sans-serif;
+    color: #4a3a5a;
+    background: rgba(255,255,255,0.9);
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.cal-input::placeholder { color: #c8b8d8; }
+.cal-input:focus {
+    border-color: #c8b0e8;
+    box-shadow: 0 0 0 3px rgba(200,176,232,0.12);
+}
+
+.cal-btn-add {
+    padding: 10px 18px;
+    border: none;
+    border-radius: 14px;
+    background: linear-gradient(135deg, #c8b0e8, #b8c0ff);
     color: white;
+    font-size: 13px;
+    font-weight: 500;
+    font-family: 'DM Sans', sans-serif;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: transform 0.15s, box-shadow 0.15s;
+    box-shadow: 0 3px 12px rgba(184,192,255,0.25);
 }
 
-@media (max-width: 600px) {
-    .calendar-card {
-        padding: 20px;
-    }
+.cal-btn-add:hover { transform: translateY(-1px); }
 
-    .event-input input {
-        width: 100%;
-        margin-bottom: 10px;
-    }
-
-    .event-input button {
-        width: 100%;
-    }
+.cal-btn-cancel {
+    padding: 10px 14px;
+    border: 1.5px solid #ece4f4;
+    border-radius: 14px;
+    background: transparent;
+    color: #b090c0;
+    font-size: 13px;
+    font-family: 'DM Sans', sans-serif;
+    cursor: pointer;
+    transition: background 0.15s;
 }
 
-@media (max-width: 768px) {
-    .calendar-layout {
-        flex-direction: column;
-        align-items: center;
-    }
+.cal-btn-cancel:hover { background: rgba(240,220,248,0.4); }
 
-    .upcoming-card {
-        width: 100%;
-    }
+.cal-error {
+    font-size: 12px;
+    color: #d45d79;
+    margin: 8px 0 0;
+    padding: 7px 12px;
+    background: rgba(212,93,121,0.08);
+    border-radius: 10px;
+}
+
+/* Day events */
+.cal-day-events {
+    background: rgba(255,255,255,0.78);
+    backdrop-filter: blur(12px);
+    border-radius: 20px;
+    border: 1px solid rgba(255,255,255,0.8);
+    box-shadow: 0 2px 16px rgba(180,160,220,0.09);
+    padding: 16px 18px;
+    min-height: 80px;
+}
+
+.cal-empty {
+    font-size: 13px;
+    color: #c0a8d8;
+    font-weight: 300;
+    margin: 8px 0 0;
+}
+
+.cal-event-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 9px 0;
+    border-bottom: 1px solid rgba(200,180,240,0.12);
+}
+
+.cal-event-row:last-child { border-bottom: none; }
+
+.cal-event-pip {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #c8b0e8, #b8c0ff);
+    flex-shrink: 0;
+}
+
+.cal-event-name {
+    flex: 1;
+    font-size: 14px;
+    color: #5a4a6a;
+}
+
+.cal-event-btns {
+    display: flex;
+    gap: 5px;
+}
+
+.cal-event-btns button {
+    padding: 4px 12px;
+    border: none;
+    border-radius: 10px;
+    font-size: 12px;
+    font-family: 'DM Sans', sans-serif;
+    cursor: pointer;
+    background: rgba(200,176,232,0.25);
+    color: #7a4a8a;
+    transition: background 0.15s;
+}
+
+.cal-delete-btn {
+    background: rgba(255,175,204,0.3) !important;
+    color: #9a4060 !important;
+}
+
+.cal-event-btns button:hover { opacity: 0.75; }
+
+/* Right sidebar */
+.cal-right {
+    width: 240px;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    position: sticky;
+    top: 74px;
+}
+
+.cal-stats-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+}
+
+.cal-stat-card {
+    background: rgba(255,255,255,0.82);
+    backdrop-filter: blur(14px);
+    border-radius: 18px;
+    border: 1px solid rgba(255,255,255,0.8);
+    box-shadow: 0 2px 14px rgba(180,160,220,0.1);
+    padding: 14px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3px;
+}
+
+.cal-stat-num {
+    font-family: 'DM Serif Display', serif;
+    font-size: 28px;
+    color: #6a4a8a;
+    line-height: 1;
+}
+
+.cal-stat-label {
+    font-size: 11px;
+    color: #b0a0c0;
+    font-weight: 300;
+    text-align: center;
+}
+
+.cal-upcoming-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 18px;
+    font-weight: 400;
+    color: #5a4a6a;
+    margin: 0 0 2px;
+}
+
+.cal-upcoming-sub {
+    font-size: 11px;
+    color: #c0a8d0;
+    font-weight: 300;
+    margin: 0 0 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+}
+
+.cal-upcoming-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.cal-upcoming-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 11px 14px;
+    background: rgba(255,255,255,0.82);
+    backdrop-filter: blur(12px);
+    border-radius: 16px;
+    border: 1px solid rgba(255,255,255,0.8);
+    box-shadow: 0 2px 10px rgba(180,160,220,0.08);
+}
+
+.cal-upcoming-badge {
+    font-size: 10px;
+    font-weight: 500;
+    padding: 3px 8px;
+    border-radius: 20px;
+    background: linear-gradient(135deg, #c8b0e8, #b8c0ff);
+    color: white;
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+
+.cal-upcoming-info {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    min-width: 0;
+}
+
+.cal-upcoming-info strong {
+    font-size: 13px;
+    font-weight: 500;
+    color: #5a4a6a;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.cal-upcoming-info span {
+    font-size: 11px;
+    color: #b0a0c0;
+    font-weight: 300;
+}
+
+@media (max-width: 700px) {
+    .cal-layout { flex-direction: column; }
+    .cal-right { width: 100%; position: static; }
+    .cal-stats-row { grid-template-columns: 1fr 1fr; }
 }

@@ -62,6 +62,19 @@ function Notes() {
     const saveEdit = () => {
         if (!title.trim() || !content.trim()) {
             setError("Please enter both a title and content");
+            return;
+        }
+        setError("");
+        axios.put(`${API}/notes/${editingId}`, { title, content }, { headers: authHeader() })
+            .then(() => {
+                getNotes();
+                setEditingId(null);
+                setTitle("");
+                setContent("");
+            })
+            .catch(() => setError("Failed to update note. Please try again."));
+    };
+        
 
 
     return (

@@ -14,7 +14,7 @@ function Notes() {
     const [error, setError] = useState("");
 
     const getNotes = () => {
-        axios.get("http://localhost:8000/notes", { headers: authHeader() })
+        axios.get("https://stoodie-backend.onrender.com/notes", { headers: authHeader() })
             .then(res => setNotes(res.data))
             .catch(err => {
                 if (err.response?.status === 401) setError("Session expired — please log in again.");
@@ -31,7 +31,7 @@ function Notes() {
             return;
         }
         setError("");
-        axios.post("http://localhost:8000/notes", { title, content }, { headers: authHeader() })
+        axios.post("https://stoodie-backend.onrender.com/notes", { title, content }, { headers: authHeader() })
             .then(() => {
                 getNotes();
                 setTitle("");
@@ -41,7 +41,7 @@ function Notes() {
     };
 
     const deleteNote = (id) => {
-        axios.delete(`http://localhost:8000/notes/${id}`, { headers: authHeader() })
+        axios.delete(`https://stoodie-backend.onrender.com/notes/${id}`, { headers: authHeader() })
             .then(() => getNotes())
             .catch(() => setError("Failed to delete note."));
     };

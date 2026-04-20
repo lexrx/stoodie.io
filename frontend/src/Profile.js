@@ -26,7 +26,7 @@ function Profile() {
 
     useEffect(() => {
         if (!userId) return;
-        axios.get(`http://localhost:8000/profile/${userId}`, { headers: authHeader() })
+        axios.get(`https://stoodie-backend.onrender.com/profile/${userId}`, { headers: authHeader() })
             .then(res => {
                 const d = res.data;
                 setForm({
@@ -51,7 +51,7 @@ function Profile() {
         setError("");
         try {
             await axios.put(
-                `http://localhost:8000/profile/${userId}`,
+                `https://stoodie-backend.onrender.com/profile/${userId}`,
                 {
                     full_name: form.full_name,
                     email: form.email,

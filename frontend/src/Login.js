@@ -28,7 +28,7 @@ function Login() {
         setLoading(true);
         setError("");
         try {
-            const response = await axios.post("http://localhost:8000/login", {
+            const response = await axios.post("https://stoodie-backend.onrender.com/login", {
                 username,
                 password
             });

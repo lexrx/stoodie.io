@@ -25,7 +25,7 @@ function MyCalendar(){
 
     //getting events from backend
     const getEvents = () => {
-        axios.get("http://localhost:8000/events", { headers: authHeader() })
+        axios.get("https://stoodie-backend.onrender.com/events", { headers: authHeader() })
             .then(res => setEvents(res.data))
             .catch(err => {
                 if (err.response?.status === 401) setError("Session expired — please log in again.");
@@ -64,13 +64,13 @@ function MyCalendar(){
     const addEvent = () => {
         if (!title.trim()) { setError("Please enter an event title"); return; }
         setError("");
-        axios.post("http://localhost:8000/events", { title, date: formatDate(safeDate) }, { headers: authHeader() })
+        axios.post("https://stoodie-backend.onrender.com/events", { title, date: formatDate(safeDate) }, { headers: authHeader() })
             .then(() => { getEvents(); setTitle(""); })
             .catch(() => setError("Failed to add event."));
     };
  
     const deleteEvent = (id) => {
-        axios.delete(`http://localhost:8000/events/${id}`, { headers: authHeader() })
+        axios.delete(`https://stoodie-backend.onrender.com/events/${id}`, { headers: authHeader() })
             .then(() => getEvents())
             .catch(() => setError("Failed to delete."));
     };
@@ -79,7 +79,7 @@ function MyCalendar(){
     const cancelEdit = () => { setEditingId(null); setTitle(""); };
  
     const updateEvent = () => {
-        axios.put(`http://localhost:8000/events/${editingId}`, { title, date: formatDate(safeDate) }, { headers: authHeader() })
+        axios.put(`https://stoodie-backend.onrender.com/events/${editingId}`, { title, date: formatDate(safeDate) }, { headers: authHeader() })
             .then(() => { setEditingId(null); setTitle(""); getEvents(); })
             .catch(() => setError("Failed to update."));
     };

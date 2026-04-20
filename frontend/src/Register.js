@@ -27,7 +27,7 @@ function Register(){
         setLoading(true);
         setError("");
         try {
-            await axios.post("http://localhost:8000/register", { username, password });
+            await axios.post("https://stoodie-backend.onrender.com/register", { username, password });
             navigate("/login");
         } catch (err) {
             if (err.response?.status === 400) {

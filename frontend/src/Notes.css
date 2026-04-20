@@ -157,3 +157,19 @@
     background: #fde8f0;
     color: #a04060;
 }
+
+.notes-cancel-btn {
+    padding: 11px 28px;
+    border: 1.5px solid #e8d8f0;
+    border-radius: 14px;
+    background: transparent;
+    color: #9a7aaa;
+    font-size: 14px;
+    font-family: 'DM Sans', sans-serif;
+    cursor: pointer;
+    transition: background 0.18s;
+}
+
+.notes-cancel-btn:hover {
+    background: rgba(232, 216, 240, 0.3);
+}

@@ -46,6 +46,24 @@ function Notes() {
             .catch(() => setError("Failed to delete note."));
     };
 
+    const startEdit = (note) => {
+        setEditingId(note.id);
+        setTitle(note.title);
+        setContent(note.content);
+    };
+ 
+    const cancelEdit = () => {
+        setEditingId(null);
+        setTitle("");
+        setContent("");
+        setError("");
+    };
+ 
+    const saveEdit = () => {
+        if (!title.trim() || !content.trim()) {
+            setError("Please enter both a title and content");
+
+
     return (
         <div className="notes-page">
             <div className="notes-container">

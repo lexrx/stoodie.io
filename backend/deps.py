@@ -5,7 +5,7 @@ from jose import JWTError, jwt
 from datetime import datetime, timedelta, timezone
 import bcrypt
 
-SECRET_KEY = "change-this-to-a-long-random-secret-in-production"
+SECRET_KEY = os.environ.get("SECRET_KEY", "local-dev-secret")
 ALGORITHM = "HS256"
 TOKEN_EXPIRE_MINUTES = 60 * 24  # 24 hours
 

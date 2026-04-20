@@ -96,9 +96,10 @@ function Notes() {
                                 <h3>{note.title}</h3>
                                 <p>{note.content}</p>
                             </div>
-                            <button className="note-delete-btn" onClick={() => deleteNote(note.id)}>
-                                Delete
-                            </button>
+                            <div style={{ display: "flex", gap: "8px", justifyContent: "flex-end" }}>
+                                <button className="note-edit-btn" onClick={() => startEdit(note)}>Edit</button>
+                                <button className="note-delete-btn" onClick={() => deleteNote(note.id)}>Delete</button>
+                            </div>
                         </div>
                     ))}
                 </div>

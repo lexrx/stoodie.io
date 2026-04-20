@@ -4,6 +4,7 @@ from fastapi.security import OAuth2PasswordBearer
 from jose import JWTError, jwt
 from datetime import datetime, timedelta, timezone
 import bcrypt
+import os
 
 SECRET_KEY = os.environ.get("SECRET_KEY", "local-dev-secret")
 ALGORITHM = "HS256"

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 fastapi
 uvicorn
 sqlalchemy
@@ -5,3 +6,12 @@ python-jose[cryptography]
 python-multipart
 bcrypt
 psycopg2-binary
+=======
+fastapi
+uvicorn
+sqlalchemy
+python-jose[cryptography]
+python-multipart
+bcrypt
+psycopg2-binary
+>>>>>>> 97d1c26636f5adb212163e9f0887b09843a6040d
